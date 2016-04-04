@@ -6,7 +6,7 @@ CREATE TABLE Kurssi(
 	loppumispvm DATE NOT NULL
 );
 
-CREATE TABLE Opiskelija(
+CREATE TABLE Kayttaja(
 	id SERIAL PRIMARY KEY,
 	kayttajanimi TEXT NOT NULL UNIQUE CHECK(length(kayttajanimi) > 3),
 	salasana TEXT NOT NULL CHECK(length(salasana) > 5)
@@ -14,7 +14,7 @@ CREATE TABLE Opiskelija(
 
 CREATE TABLE Kurssisuoritus(
 	id SERIAL PRIMARY KEY,
-	opiskelija INTEGER NOT NULL REFERENCES Opiskelija(id),
+	kayttaja INTEGER NOT NULL REFERENCES Kayttaja(id),
 	kurssi INTEGER NOT NULL REFERENCES Kurssi(id),
 	nimi TEXT NOT NULL
 );
