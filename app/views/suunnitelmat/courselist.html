@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h1>Kurssit</h1>
+
+	<a class="btn btn-default" href="#">Uusi opiskelusessio</a>
+	<a class="btn btn-default" href="#">Uusi koe</a>
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Käynnissä olevat kurssit</th>
+				<th>Opintopisteet</th>
+				<th>Alkaa</th>
+				<th>Päättyy</th>
+				<th>Käytetty aika</th>
+				<th><a class="btn btn-default btn-sm pull-right" href="#">Lisää kurssi</a></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><a href="#">Johdatus tietojenkäsittelytieteeseen</a></td>
+				<td>5</td>
+				<td>19.8.2016</td>
+				<td>4.10.9999</td>
+				<td>5h</td>
+				<td><a class="btn btn-default btn-sm pull-right" href="#">Muokkaa</a></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Vanhat kurssit</th>
+				<th>Opintopisteet</th>
+				<th>Alkoi</th>
+				<th>Päättyi</th>
+				<th>Käytetty aika</th>
+				<th>Arvosana</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><a href="#">Johdatus yliopistomatematiikkaan</a></td>
+				<td>5</td>
+				<td>19.8.2016</td>
+				<td>13.12.2016</td>
+				<td>30h</td>
+				<td>3</td>
+			</tr>
+		</tbody>
+	</table>
+{% endblock %}
