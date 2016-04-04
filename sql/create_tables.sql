@@ -1,5 +1,6 @@
 CREATE TABLE Kurssi(
 	id SERIAL PRIMARY KEY,
+	nimi TEXT NOT NULL,
 	opintopisteet INTEGER NOT NULL,
 	alkamispvm DATE NOT NULL,
 	loppumispvm DATE NOT NULL
@@ -13,33 +14,29 @@ CREATE TABLE Opiskelija(
 
 CREATE TABLE Kurssisuoritus(
 	id SERIAL PRIMARY KEY,
-	opiskelija INTEGER NOT NULL,
-	kurssi INTEGER NOT NULL,
-	FOREIGN KEY opiskelija REFERENCES Opiskelija(id),
-	FOREIGN KEY kurssi REFERENCES Kurssi(id)
+	opiskelija INTEGER NOT NULL REFERENCES Opiskelija(id),
+	kurssi INTEGER NOT NULL REFERENCES Kurssi(id),
+	nimi TEXT NOT NULL
 );
 
 CREATE TABLE Koe(
 	id SERIAL PRIMARY KEY,
-	kurssisuoritus INTEGER NOT NULL,
+	kurssisuoritus INTEGER NOT NULL REFERENCES Kurssisuoritus(id),
 	pvm DATE NOT NULL,
 	pisteet INTEGER,
-	arvosana INTEGER,
-	FOREIGN KEY kurssi REFERENCES Kurssisuoritus(id)
+	arvosana INTEGER
 );
 
 CREATE TABLE Muistiinpano(
 	id SERIAL PRIMARY KEY,
-	kurssisuoritus INTEGER NOT NULL,
-	sisalto TEXT NOT NULL.
-	FOREIGN KEY kurssisuoritus REFERENCES Kurssisuoritus(id)
+	kurssisuoritus INTEGER NOT NULL REFERENCES Kurssisuoritus(id),
+	sisalto TEXT NOT NULL
 );
 
 CREATE TABLE Opiskelusessio(
 	id SERIAL PRIMARY KEY,
-	kurssisuoritus INTEGER NOT NULL,
+	kurssisuoritus INTEGER NOT NULL REFERENCES Kurssisuoritus(id),
 	pvm DATE NOT NULL,
 	kesto INTEGER NOT NULL,
-	tekniikka TEXT,
-	FOREIGN KEY kurssi REFERENCES Kurssisuoritus(id)
+	tekniikka TEXT
 );
