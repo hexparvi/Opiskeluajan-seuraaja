@@ -17,11 +17,15 @@
   });
   
   $routes->get('/courses', function() {
-    HelloWorldController::courselist();
+    CourseController::index();
   });
   
-  $routes->get('/courses/1', function() {
-    HelloWorldController::course();
+  $routes->get('/courses/:id', function($id) {
+    CourseController::show($id);
+  });
+  
+  $routes->post('/course', function() {
+    CourseController::store();
   });
   
   $routes->get('/courses/1/edittest', function() {
@@ -29,7 +33,7 @@
   });
   
   $routes->get('/joincourse', function() {
-    HelloWorldController::joincourse();
+   CourseController::create();
   });
   
   $routes->get('/stats', function() {

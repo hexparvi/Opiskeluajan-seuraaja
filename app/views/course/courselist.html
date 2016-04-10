@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h1>Kurssit</h1>
+
+	<a class="btn btn-default" href="{{base_path}}/studysession/new">Uusi opiskelusessio</a>
+	<a class="btn btn-default" href="{{base_path}}/test/new">Uusi koe</a>
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Nykyiset ja tulevat kurssit</th>
+				<th>Opintopisteet</th>
+				<th>Alkaa</th>
+				<th>Päättyy</th>
+				<th>Käytetty aika</th>
+				<th><a class="btn btn-default btn-sm pull-right" href="{{base_path}}/joincourse">Lisää kurssi</a></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for currentcourse in currentcourses %}
+			<tr>
+				<td><a href="{{base_path}}/courses/{{currentcourse.id}}">{{currentcourse.name}}</a></td>
+				<td>{{currentcourse.credits}}</td>
+				<td>{{currentcourse.startdate}}</td>
+				<td>{{currentcourse.enddate}}</td>
+				<td>5h</td>
+				<td><a class="btn btn-default btn-sm pull-right" href="{{base_path}}/courses/{{currentcourse.id}}">Muokkaa</a></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Vanhat kurssit</th>
+				<th>Opintopisteet</th>
+				<th>Alkoi</th>
+				<th>Päättyi</th>
+				<th>Käytetty aika</th>
+				<th>Arvosana</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for oldcourse in oldcourses %}
+			<tr>
+				<td><a href="{{base_path}}/courses/{{oldcourse.id}}">{{oldcourse.name}}</a></td>
+				<td>{{oldcourse.credits}}</td>
+				<td>{{oldcourse.startdate}}</td>
+				<td>{{oldcourse.enddate}}</td>
+				<td>30h</td>
+				<td>{{oldcourse.grade}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

@@ -1,42 +1,42 @@
-CREATE TABLE Kurssi(
+CREATE TABLE course(
 	id SERIAL PRIMARY KEY,
-	nimi TEXT NOT NULL,
-	opintopisteet INTEGER NOT NULL,
-	alkamispvm DATE NOT NULL,
-	loppumispvm DATE NOT NULL
+	name TEXT NOT NULL,
+	credits INTEGER NOT NULL,
+	startdate DATE NOT NULL,
+	enddate DATE NOT NULL,
+	ispublic BOOLEAN NOT NULL
 );
 
-CREATE TABLE Kayttaja(
+CREATE TABLE person(
 	id SERIAL PRIMARY KEY,
-	kayttajanimi TEXT NOT NULL UNIQUE CHECK(length(kayttajanimi) > 3),
-	salasana TEXT NOT NULL CHECK(length(salasana) > 5)
+	username TEXT NOT NULL UNIQUE,
+	pw TEXT NOT NULL CHECK(length(pw) > 5)
 );
 
-CREATE TABLE Kurssisuoritus(
+CREATE TABLE personcourse(
 	id SERIAL PRIMARY KEY,
-	kayttaja INTEGER NOT NULL REFERENCES Kayttaja(id),
-	kurssi INTEGER NOT NULL REFERENCES Kurssi(id),
-	nimi TEXT NOT NULL
+	person INTEGER NOT NULL REFERENCES Person(id),
+	course INTEGER NOT NULL REFERENCES Course(id),
+	grade INTEGER
 );
 
-CREATE TABLE Koe(
+CREATE TABLE test(
 	id SERIAL PRIMARY KEY,
-	kurssisuoritus INTEGER NOT NULL REFERENCES Kurssisuoritus(id),
-	pvm DATE NOT NULL,
-	pisteet INTEGER,
-	arvosana INTEGER
+	personcourse INTEGER NOT NULL REFERENCES PersonCourse(id),
+	takendate DATE NOT NULL,
+	points INTEGER
 );
 
-CREATE TABLE Muistiinpano(
+CREATE TABLE note(
 	id SERIAL PRIMARY KEY,
-	kurssisuoritus INTEGER NOT NULL REFERENCES Kurssisuoritus(id),
-	sisalto TEXT NOT NULL
+	personcourse INTEGER NOT NULL REFERENCES PersonCourse(id),
+	content TEXT NOT NULL
 );
 
-CREATE TABLE Opiskelusessio(
+CREATE TABLE studysession(
 	id SERIAL PRIMARY KEY,
-	kurssisuoritus INTEGER NOT NULL REFERENCES Kurssisuoritus(id),
-	pvm DATE NOT NULL,
-	kesto INTEGER NOT NULL,
-	tekniikka TEXT
+	personcourse INTEGER NOT NULL REFERENCES PersonCourse(id),
+	completiondate DATE NOT NULL,
+	time INTEGER NOT NULL,
+	technique TEXT
 );

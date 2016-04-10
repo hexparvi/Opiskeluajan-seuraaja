@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<h1>Johdatus tietojenkäsittelytieteeseen</h1>
+	<h1>{{course.name}}</h1>
 
 	<p>
 		<a class="btn btn-default" href="#">Uusi opiskelusessio</a>
@@ -12,10 +12,10 @@
 
 	<ul>
 		<li><strong>Op:</strong> 5</li>
-		<li><strong>Alkamispäivämäärä:</strong> 13.8.2016</li>
-		<li><strong>Päättymispäivämäärä:</strong> 4.10.2016</li>
+		<li><strong>Alkamispäivämäärä:</strong> {{course.startdate}}</li>
+		<li><strong>Päättymispäivämäärä:</strong> {{course.enddate}}</li>
 		<li><strong>Käytetty aika:</strong> 5h</li>
-		<li><strong>Arvosana:</strong></li>
+		<li><strong>Arvosana:</strong> {{course.grade}}</li>
 		<li><strong><a href="#">Opiskelusessiot</a></strong></li>
 	</ul>
 
@@ -24,21 +24,21 @@
 			<tr>
 				<th>Kokeet</th>
 				<th>Pisteet</th>
-				<th>Arvosana</th>
 				<th>Päivämäärä</th>
 				<th></th>
 				<th></th>
 			</tr>
 		</thead>
 		<tbody>
+			{% for test in tests %}
 			<tr>
-				<td>Koe 1</td>
-				<td>0</td>
-				<td>0</td>
-				<td>13.6.2016</td>
+				<td>{{test.id}}</td>
+				<td>{{test.points}}</td>
+				<td>{{test.takendate}}</td>
 				<td><a class="btn btn-default btn-sm pull-right" href="#">Muokkaa</a></td>
 				<td><a class="btn btn-danger btn-sm pull-right" href="#">Poista koe</a></td>
 			</tr>
+			{% endfor %}
 		</tbody>
 	</table>
 
@@ -46,14 +46,18 @@
 		<thead>
 			<tr>
 				<th>Muistiinpanot</th>
+				<th></th>
 				<th><a class="btn btn-default btn-sm pull-right" href="#">Uusi muistiinpano</a></th>
 			</tr>
 		</thead>
 		<tbody>
+			{% for note in notes %}
 			<tr>
-				<td>Tavoite: arvosana 5</td>
+				<td>{{note.content}}</td>
+				<td><a class="btn btn-default btn-sm pull-right" href="#">Muokkaa</a></td>
 				<td><a class="btn btn-danger btn-sm pull-right" href="#">Poista muistiinpano</a></td>
 			</tr>
+			{% endfor %}
 		</tbody>
 	</table>
 {% endblock %}
