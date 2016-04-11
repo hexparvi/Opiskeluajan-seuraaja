@@ -64,13 +64,12 @@ class Course extends BaseModel {
 	}
 	
 	public function save() {
-		$query = DB::connection()->prepare('INSERT INTO Course (name, credits, startdate, enddate, ispublic) ' +
-		'VALUES (:name, :credits, :startdate, :enddate, :ispublic) RETURNING id');
+		$query = DB::connection()->prepare('INSERT INTO Course (name, credits, startdate, enddate, ispublic) VALUES (:name, :credits, :startdate, :enddate, :ispublic) RETURNING id');
 		$query->execute(array('name' => $this->name, 'credits' => $this->credits, 'startdate' => $this->startdate, 
 		'enddate' => $this->enddate, 'ispublic' => $this->ispublic));
 		$row = $query->fetch();
-		//Kint::trace();
-		//Kint::dump($row);
+		Kint::trace();
+		Kint::dump($row);
 		$this->id = $row['id'];
 	}
 }
