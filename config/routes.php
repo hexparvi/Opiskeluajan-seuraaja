@@ -20,6 +20,35 @@
     UserController::handle_login();
   });
   
+    // Muistiinpanojen reitit
+  $routes->get('/courses/:id/newnote', function($id) {
+    NoteController::create();
+  });
+  
+  $routes->get('/stats', function() {
+    HelloWorldController::stats();
+  });
+  
+  // Kokeiden reitit
+  $routes->get('/edittest', function() {
+    HelloWorldController::edittest();
+  });
+  
+  $routes->get('/courses/newtest', function() {
+	  TestController::create();
+	  });
+  $routes->get('/courses/:id/newtest', function($id) {
+    TestController::create();
+  });
+  
+  // Opiskelusessioiden reitit
+  $routes->get('/courses/newsession', function() {
+	  StudyController::create();
+	  });
+  $routes->get('/courses/:id/newsession', function($id) {
+    StudyController::create();
+  });
+  
   //Kurssien reitit
   $routes->get('/courses', function() {
     CourseController::index();
@@ -53,19 +82,4 @@
     HelloWorldController::edittest();
   });
   
-  $routes->get('/stats', function() {
-    HelloWorldController::stats();
-  });
-  
-  // Kokeiden reitit
-  $routes->get('/edittest', function() {
-    HelloWorldController::edittest();
-  });
-  
-  $routes->get('/newtest', function() {
-    HelloWorldController::newtest();
-  });
-  
-  $routes->get('/newstudy', function() {
-    HelloWorldController::newstudy();
-  });
+
