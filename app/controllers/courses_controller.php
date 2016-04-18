@@ -1,10 +1,13 @@
 <?php
 class CourseController extends BaseController {
 	public static function index() {
-		$personcourses = Personcourse::user_courses(self::get_user_logged_in());
-		$currentcourses = Course::current();
-		$oldcourses = Course::old();
-		View::make('course/courselist.html', array('currentcourses' => $currentcourses, 'oldcourses' => $oldcourses));
+		$user = self::get_user_logged_in();
+		if (!$user) {
+			View::make('user/login.html');
+		} else {
+			$personcourses = Personcourse::user_courses($user->personid);
+			View::make('course/courselist.html', array('courses' => $personcourses));
+		}
 	}
 	
 	public static function show($id) {

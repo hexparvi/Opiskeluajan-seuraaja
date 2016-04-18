@@ -17,7 +17,7 @@
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th>Nykyiset ja tulevat kurssit</th>
+				<th>Kurssit</th>
 				<th>Opintopisteet</th>
 				<th>Alkaa</th>
 				<th>Päättyy</th>
@@ -26,39 +26,14 @@
 			</tr>
 		</thead>
 		<tbody>
-			{% for currentcourse in currentcourses %}
+			{% for course in courses %}
 			<tr>
-				<td><a href="{{base_path}}/courses/{{currentcourse.courseid}}">{{currentcourse.name}}</a></td>
-				<td>{{currentcourse.credits}}</td>
-				<td>{{currentcourse.startdate}}</td>
-				<td>{{currentcourse.enddate}}</td>
+				<td><a href="{{base_path}}/courses/{{course.courseid}}">{{course.name}}</a></td>
+				<td>{{course.credits}}</td>
+				<td>{{course.startdate}}</td>
+				<td>{{course.enddate}}</td>
 				<td>5h</td>
-				<td><a class="btn btn-default btn-sm pull-right" href="{{base_path}}/courses/{{currentcourse.courseid}}">Muokkaa</a></td>
-			</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th>Vanhat kurssit</th>
-				<th>Opintopisteet</th>
-				<th>Alkoi</th>
-				<th>Päättyi</th>
-				<th>Käytetty aika</th>
-				<th>Arvosana</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for oldcourse in oldcourses %}
-			<tr>
-				<td><a href="{{base_path}}/courses/{{oldcourse.courseid}}">{{oldcourse.name}}</a></td>
-				<td>{{oldcourse.credits}}</td>
-				<td>{{oldcourse.startdate}}</td>
-				<td>{{oldcourse.enddate}}</td>
-				<td>30h</td>
-				<td>{{oldcourse.grade}}</td>
+				<td><a class="btn btn-default btn-sm pull-right" href="{{base_path}}/courses/{{course.courseid}}/edit">Muokkaa</a></td>
 			</tr>
 			{% endfor %}
 		</tbody>

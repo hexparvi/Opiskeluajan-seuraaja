@@ -33,6 +33,8 @@ class User extends BaseModel {
 				'username' => $row['username'],
 				'pw' => $row['pw']
 			));
+			return $user;
 		}
+		return null;
 	}
 }
