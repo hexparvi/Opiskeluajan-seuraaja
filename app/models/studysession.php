@@ -1,6 +1,6 @@
 <?php
 class Studysession extends BaseModel {
-	public $id, $personcourse, $completiondate, $time, $technique;
+	public $sessionid, $personcourse, $completiondate, $time, $technique;
 	
 	public function __construct($attributes) {
 		parent::__construct($attributes);
@@ -14,7 +14,7 @@ class Studysession extends BaseModel {
 		
 		foreach($rows as $row) {
 			$studysessions[] = new Studysession(array(
-				'id' => $row['id'],
+				'sessionid' => $row['sessionid'],
 				'personcourse' => $row['personcourse'],
 				'completiondate' => $row['time'],
 				'technique' => $row['technique']

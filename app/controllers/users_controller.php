@@ -10,8 +10,8 @@ class UserController extends BaseController {
 		if (!$user) {
 			View::make('user/login.html', array('error' => 'Väärä käyttäjätunnus tai salasana', 'username' => $params['username']));
 		} else {
-			$_SESSION['user'] = $user->id;
-			Redirect::to('/', array('message' => 'Tervetuloa takaisin ' . $user->name . '!'));
+			$_SESSION['user'] = $user->personid;
+			Redirect::to('/', array('message' => 'Tervetuloa takaisin ' . $user->username . '!'));
 		}
 	}
 }

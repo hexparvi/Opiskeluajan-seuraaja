@@ -2,6 +2,14 @@
 
 {% block content %}
 	<h1>Kurssit</h1>
+	
+	{% if message %}
+	<div class="alert alert-danger">
+		<ul>
+			<li>{{message}}</li>
+		</ul>
+	</div>
+	{% endif %}
 
 	<a class="btn btn-default" href="{{base_path}}/studysession/new">Uusi opiskelusessio</a>
 	<a class="btn btn-default" href="{{base_path}}/test/new">Uusi koe</a>
@@ -20,12 +28,12 @@
 		<tbody>
 			{% for currentcourse in currentcourses %}
 			<tr>
-				<td><a href="{{base_path}}/courses/{{currentcourse.id}}">{{currentcourse.name}}</a></td>
+				<td><a href="{{base_path}}/courses/{{currentcourse.courseid}}">{{currentcourse.name}}</a></td>
 				<td>{{currentcourse.credits}}</td>
 				<td>{{currentcourse.startdate}}</td>
 				<td>{{currentcourse.enddate}}</td>
 				<td>5h</td>
-				<td><a class="btn btn-default btn-sm pull-right" href="{{base_path}}/courses/{{currentcourse.id}}">Muokkaa</a></td>
+				<td><a class="btn btn-default btn-sm pull-right" href="{{base_path}}/courses/{{currentcourse.courseid}}">Muokkaa</a></td>
 			</tr>
 			{% endfor %}
 		</tbody>
@@ -45,7 +53,7 @@
 		<tbody>
 			{% for oldcourse in oldcourses %}
 			<tr>
-				<td><a href="{{base_path}}/courses/{{oldcourse.id}}">{{oldcourse.name}}</a></td>
+				<td><a href="{{base_path}}/courses/{{oldcourse.courseid}}">{{oldcourse.name}}</a></td>
 				<td>{{oldcourse.credits}}</td>
 				<td>{{oldcourse.startdate}}</td>
 				<td>{{oldcourse.enddate}}</td>

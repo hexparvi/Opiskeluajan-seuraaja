@@ -1,6 +1,6 @@
 <?php
 class Test extends BaseModel {
-	public $id, $personcourse, $takendate, $points;
+	public $testid, $personcourse, $takendate, $points;
 	
 	public function __construct($attributes) {
 		parent::__construct($attributes);
@@ -14,7 +14,7 @@ class Test extends BaseModel {
 		
 		foreach($rows as $row) {
 			$tests[] = new Test(array(
-				'id' => $row['id'],
+				'testid' => $row['testid'],
 				'personcourse' => $row['personcourse'],
 				'takendate' => $row['takendate'],
 				'points' => $row['points']

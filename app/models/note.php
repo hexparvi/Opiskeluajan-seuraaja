@@ -1,6 +1,6 @@
 <?php
 class Note extends BaseModel {
-	public $id, $personcourse, $content;
+	public $noteid, $personcourse, $content;
 	
 	public function __construct($attributes) {
 		parent::__construct($attributes);
@@ -14,7 +14,7 @@ class Note extends BaseModel {
 		
 		foreach($rows as $row) {
 			$notes[] = new Note(array(
-				'id' => $row['id'],
+				'noteid' => $row['noteid'],
 				'personCourse' => $id,
 				'content' => $row['content']
 			));

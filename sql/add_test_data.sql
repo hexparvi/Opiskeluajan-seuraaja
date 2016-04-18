@@ -4,8 +4,8 @@ INSERT INTO course (name, credits, startdate, enddate, ispublic) VALUES ('ohja',
 
 INSERT INTO person (username, pw) VALUES ('pekka', 'hessuhopo');
 
-INSERT INTO personcourse (person, course) VALUES ((SELECT id FROM person WHERE username='pekka'), (SELECT id FROM course WHERE name='otm'));
-INSERT INTO personcourse (person, course) VALUES ((SELECT id FROM person WHERE username='pekka'), (SELECT id FROM course WHERE name='tsoha'));
+INSERT INTO personcourse (person, course) VALUES ((SELECT personid FROM person WHERE username='pekka'), (SELECT courseid FROM course WHERE name='otm'));
+INSERT INTO personcourse (person, course) VALUES ((SELECT personid FROM person WHERE username='pekka'), (SELECT courseid FROM course WHERE name='tsoha'));
 
 INSERT INTO test (personcourse, takendate, points) VALUES (1, now(), 0);
 

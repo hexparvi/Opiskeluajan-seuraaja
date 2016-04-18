@@ -1,10 +1,10 @@
 <?php
 class Course extends BaseModel {
-	public $id, $name, $credits, $startdate, $enddate, $ispublic;
+	public $courseid, $name, $credits, $startdate, $enddate, $ispublic;
 	
 	public function __construct($attributes) {
 		parent::__construct($attributes);
-		$this->validators = array('validate_name');
+		$this->validators = array('validate_credits');
 	}
 	
 	public static function current() {
@@ -15,7 +15,7 @@ class Course extends BaseModel {
 		
 		foreach($rows as $row) {
 			$currentcourses[] = new Course(array(
-				'id' => $row['id'],
+				'courseid' => $row['courseid'],
 				'name' => $row['name'],
 				'credits' => $row['credits'],
 				'startdate' => $row['startdate'],
@@ -34,7 +34,7 @@ class Course extends BaseModel {
 		
 		foreach($rows as $row) {
 			$oldcourses[] = new Course(array(
-				'id' => $row['id'],
+				'courseid' => $row['courseid'],
 				'name' => $row['name'],
 				'credits' => $row['credits'],
 				'startdate' => $row['startdate'],
@@ -53,7 +53,7 @@ class Course extends BaseModel {
 		
 		foreach($rows as $row) {
 			$publiccourses[] = new Course(array(
-				'id' => $row['id'],
+				'courseid' => $row['courseid'],
 				'name' => $row['name'],
 				'credits' => $row['credits'],
 				'startdate' => $row['startdate'],
@@ -65,13 +65,13 @@ class Course extends BaseModel {
 	}
 	
 	public static function find($id) {
-		$query = DB::connection()->prepare('SELECT * FROM Course WHERE id = :id LIMIT 1');
+		$query = DB::connection()->prepare('SELECT * FROM Course WHERE courseid = :id LIMIT 1');
 		$query->execute(array('id' => $id));
 		$row = $query->fetch();
 		
 		if ($row) {
 			$course = new Course(array(
-				'id' => $row['id'],
+				'courseid' => $row['courseid'],
 				'name' => $row['name'],
 				'credits' => $row['credits'],
 				'startdate' => $row['startdate'],
@@ -88,22 +88,22 @@ class Course extends BaseModel {
 		$query->execute(array('name' => $this->name, 'credits' => $this->credits, 'startdate' => $this->startdate, 
 		'enddate' => $this->enddate, 'ispublic' => $this->ispublic));
 		$row = $query->fetch();
-		$this->id = $row['id'];
+		$this->courseid = $row['courseid'];
 	}
 	
 	public function update() {
-		$query = DB::connection()->prepare('UPDATE Course SET credits = :credits WHERE id = :id');
-		$query->execute(array('credits' => $this->credits, 'id' => $this->id));
+		$query = DB::connection()->prepare('UPDATE Course SET credits = :credits WHERE courseid = :id');
+		$query->execute(array('credits' => $this->credits, 'id' => $this->courseid));
 	}
 	
 	public function destroy() {
-		$query = DB::connection()->prepare('DELETE FROM Course WHERE id = :id');
-		$query->execute(array('id' => $this->id));
+		$query = DB::connection()->prepare('DELETE FROM Course WHERE courseid = :id');
+		$query->execute(array('id' => $this->courseid));
 	}
 	
-	public function validate_name() {
+	public function validate_credits() {
 		$errors = array();
-		$errors = $this->validate_string_length($this->name, 3);
+		$errors = $this->validate_int_value($this->credits, 1, 30);
 		return $errors;
 	}
 }

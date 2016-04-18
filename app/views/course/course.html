@@ -2,12 +2,20 @@
 
 {% block content %}
 	<h1>{{course.name}}</h1>
+	
+	{% if message %}
+	<div class="alert alert-danger">
+		<ul>
+			<li>{{message}}</li>
+		</ul>
+	</div>
+	{% endif %}
 
 	<p>
 		<a class="btn btn-default" href="#">Uusi opiskelusessio</a>
 		<a class="btn btn-default" href="#">Uusi koe</a>
-		<a class="btn btn-default" href="{{base_path}}/courses/{{course.id}}/edit">Muokkaa kurssia</a>
-		<form method="post" action="{{base_path}}/courses/{{course.id}}/destroy">
+		<a class="btn btn-default" href="{{base_path}}/courses/{{course.courseid}}/edit">Muokkaa kurssia</a>
+		<form method="post" action="{{base_path}}/courses/{{course.courseid}}/destroy">
 			<button type="submit" class="btn btn-danger">Poista kurssi</button>
 		</form>
 	</p>
