@@ -7,8 +7,11 @@ class HelloWorldController extends BaseController {
     }
 
     public static function sandbox() {
-        // Testaa koodiasi täällä
-        echo 'Hello World!';
+        $doom = new Course(array(
+			'name' => 'd'
+        ));
+        $errors = $doom->errors();
+        Kint::dump($errors);
     }
     
     public static function home() {

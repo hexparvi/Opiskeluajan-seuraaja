@@ -4,6 +4,7 @@ class Course extends BaseModel {
 	
 	public function __construct($attributes) {
 		parent::__construct($attributes);
+		$this->validators = array('validate_name');
 	}
 	
 	public static function current() {
@@ -44,6 +45,25 @@ class Course extends BaseModel {
 		return $oldcourses;
 	}
 	
+	public static function public_courses() {
+		$query = DB::connection()->prepare('SELECT * FROM Course WHERE ispublic = true');
+		$query->execute();
+		$rows = $query->fetchAll();
+		$publiccourses = array();
+		
+		foreach($rows as $row) {
+			$publiccourses[] = new Course(array(
+				'id' => $row['id'],
+				'name' => $row['name'],
+				'credits' => $row['credits'],
+				'startdate' => $row['startdate'],
+				'enddate' => $row['enddate'],
+				'ispublic' => $row['ispublic']
+			));
+		}
+		return $publiccourses;
+	}
+	
 	public static function find($id) {
 		$query = DB::connection()->prepare('SELECT * FROM Course WHERE id = :id LIMIT 1');
 		$query->execute(array('id' => $id));
@@ -68,8 +88,22 @@ class Course extends BaseModel {
 		$query->execute(array('name' => $this->name, 'credits' => $this->credits, 'startdate' => $this->startdate, 
 		'enddate' => $this->enddate, 'ispublic' => $this->ispublic));
 		$row = $query->fetch();
-		Kint::trace();
-		Kint::dump($row);
 		$this->id = $row['id'];
+	}
+	
+	public function update() {
+		$query = DB::connection()->prepare('UPDATE Course SET credits = :credits WHERE id = :id');
+		$query->execute(array('credits' => $this->credits, 'id' => $this->id));
+	}
+	
+	public function destroy() {
+		$query = DB::connection()->prepare('DELETE FROM Course WHERE id = :id');
+		$query->execute(array('id' => $this->id));
+	}
+	
+	public function validate_name() {
+		$errors = array();
+		$errors = $this->validate_string_length($this->name, 3);
+		return $errors;
 	}
 }

@@ -21,9 +21,26 @@
 
       foreach($this->validators as $validator){
         // Kutsu validointimetodia tässä ja lisää sen palauttamat virheet errors-taulukkoon
+        $errors = array_merge($errors, $this->{$validator}());
       }
 
       return $errors;
     }
+    
+    public function validate_string_length($string, $length) {
+		$errors = array();
+		if (strlen($string) < $length) {
+			$errors[] = 'Nimen tulee olla vähintään ' . $length . ' merkkiä pitkä!';
+		}
+		return $errors;
+	}
+	
+	public function validate_int_value($int, $min, $max) {
+		$errors = array();
+		if ($int < $min || $int > $max) {
+			$errors[] = 'Arvon tulee olla välillä ' . $min . '-' . $max;
+		}
+		return $errors;
+	}
 
   }

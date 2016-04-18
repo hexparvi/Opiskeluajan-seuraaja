@@ -15,27 +15,27 @@ CREATE TABLE person(
 
 CREATE TABLE personcourse(
 	id SERIAL PRIMARY KEY,
-	person INTEGER NOT NULL REFERENCES Person(id),
-	course INTEGER NOT NULL REFERENCES Course(id),
+	person INTEGER NOT NULL REFERENCES Person(id) ON DELETE CASCADE,
+	course INTEGER NOT NULL REFERENCES Course(id) ON DELETE CASCADE,
 	grade INTEGER
 );
 
 CREATE TABLE test(
 	id SERIAL PRIMARY KEY,
-	personcourse INTEGER NOT NULL REFERENCES PersonCourse(id),
+	personcourse INTEGER NOT NULL REFERENCES PersonCourse(id) ON DELETE CASCADE,
 	takendate DATE NOT NULL,
 	points INTEGER
 );
 
 CREATE TABLE note(
 	id SERIAL PRIMARY KEY,
-	personcourse INTEGER NOT NULL REFERENCES PersonCourse(id),
+	personcourse INTEGER NOT NULL REFERENCES PersonCourse(id) ON DELETE CASCADE,
 	content TEXT NOT NULL
 );
 
 CREATE TABLE studysession(
 	id SERIAL PRIMARY KEY,
-	personcourse INTEGER NOT NULL REFERENCES PersonCourse(id),
+	personcourse INTEGER NOT NULL REFERENCES PersonCourse(id) ON DELETE CASCADE,
 	completiondate DATE NOT NULL,
 	time INTEGER NOT NULL,
 	technique TEXT

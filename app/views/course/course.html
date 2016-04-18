@@ -6,8 +6,10 @@
 	<p>
 		<a class="btn btn-default" href="#">Uusi opiskelusessio</a>
 		<a class="btn btn-default" href="#">Uusi koe</a>
-		<a class="btn btn-default" href="#">Muokkaa kurssia</a>
-		<button class="btn btn-danger">Poista kurssi</button>
+		<a class="btn btn-default" href="{{base_path}}/courses/{{course.id}}/edit">Muokkaa kurssia</a>
+		<form method="post" action="{{base_path}}/courses/{{course.id}}/destroy">
+			<button type="submit" class="btn btn-danger">Poista kurssi</button>
+		</form>
 	</p>
 
 	<ul>
