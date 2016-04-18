@@ -21,3 +21,7 @@ Käyttäjä voi katsoa tilastoja kaikista kursseistaan tai kurssikohtaisesti eri
 * [Kokeen lisäys](http://hexparvi.users.cs.helsinki.fi/tsoha/newtest)
 * [Kokeen muokkaaminen](http://hexparvi.users.cs.helsinki.fi/tsoha/edittest)
 * [Kurssille liittyminen](http://hexparvi.users.cs.helsinki.fi/tsoha/joincourse)
+
+## Testikäyttäjä
+Tunnus: pekka  
+Salasana: hessuhopo  
