@@ -5,7 +5,7 @@ class NoteController extends BaseController {
 		if (!$user) {
 			View::make('user/login.html');
 		} else {
-			$courses = Personcourse::user_courses($user->personid);
+			$courses = PersonCourse::user_courses($user->personid);
 			View::make('note/newnote.html', array('courses' => $courses));
 		}
 	}

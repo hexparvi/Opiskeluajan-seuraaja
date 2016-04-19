@@ -1,48 +1,10 @@
 <?php
 class Course extends BaseModel {
-	public $courseid, $name, $credits, $startdate, $enddate, $ispublic;
+	public $courseid, $name, $credits, $ispublic;
 	
 	public function __construct($attributes) {
 		parent::__construct($attributes);
 		$this->validators = array('validate_credits');
-	}
-	
-	public static function current() {
-		$query = DB::connection()->prepare('SELECT * FROM Course WHERE enddate > now()');
-		$query->execute();
-		$rows = $query->fetchAll();
-		$currentcourses = array();
-		
-		foreach($rows as $row) {
-			$currentcourses[] = new Course(array(
-				'courseid' => $row['courseid'],
-				'name' => $row['name'],
-				'credits' => $row['credits'],
-				'startdate' => $row['startdate'],
-				'enddate' => $row['enddate'],
-				'ispublic' => $row['ispublic']
-			));
-		}
-		return $currentcourses;
-	}
-	
-	public static function old() {
-		$query = DB::connection()->prepare('SELECT * FROM Course WHERE enddate < now()');
-		$query->execute();
-		$rows = $query->fetchAll();
-		$oldcourses = array();
-		
-		foreach($rows as $row) {
-			$oldcourses[] = new Course(array(
-				'courseid' => $row['courseid'],
-				'name' => $row['name'],
-				'credits' => $row['credits'],
-				'startdate' => $row['startdate'],
-				'enddate' => $row['enddate'],
-				'ispublic' => $row['ispublic']
-			));
-		}
-		return $oldcourses;
 	}
 	
 	public static function public_courses() {
@@ -56,8 +18,6 @@ class Course extends BaseModel {
 				'courseid' => $row['courseid'],
 				'name' => $row['name'],
 				'credits' => $row['credits'],
-				'startdate' => $row['startdate'],
-				'enddate' => $row['enddate'],
 				'ispublic' => $row['ispublic']
 			));
 		}
@@ -74,8 +34,6 @@ class Course extends BaseModel {
 				'courseid' => $row['courseid'],
 				'name' => $row['name'],
 				'credits' => $row['credits'],
-				'startdate' => $row['startdate'],
-				'enddate' => $row['enddate'],
 				'ispublic' => $row['ispublic']
 			));
 			return $course;
@@ -84,9 +42,10 @@ class Course extends BaseModel {
 	}
 	
 	public function save() {
-		$query = DB::connection()->prepare('INSERT INTO Course (name, credits, startdate, enddate, ispublic) VALUES (:name, :credits, :startdate, :enddate, :ispublic) RETURNING id');
-		$query->execute(array('name' => $this->name, 'credits' => $this->credits, 'startdate' => $this->startdate, 
-		'enddate' => $this->enddate, 'ispublic' => $this->ispublic));
+		$query = DB::connection()->prepare('INSERT INTO Course (name, credits, ispublic) 
+											VALUES (:name, :credits, :ispublic) 
+											RETURNING courseid');
+		$query->execute(array('name' => $this->name, 'credits' => $this->credits, 'ispublic' => $this->ispublic));
 		$row = $query->fetch();
 		$this->courseid = $row['courseid'];
 	}

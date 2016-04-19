@@ -4,7 +4,7 @@
 	<h1>Liity uudelle kurssille</h1>
 
 	<h3>Valitse olemassaoleva kurssi listasta...</h3>
-	<form>
+	<form method="post" action="{{base_path}}/course">
 		<div class="form-group row">
 			<label class="col-xs-2">Kurssi</label>
 			<select name="kurssit">
@@ -43,18 +43,6 @@
 			<label class="col-xs-2">Opintopisteet</label>
 			<div class="col-xs-2">
 				<input type="number" name="credits" class="form-control col-xs-2" value="{{attributes.credits}}">
-			</div>
-		</div>
-		<div class="form-group row">
-			<label class="col-xs-2">Alkamispäivämäärä</label>
-			<div class="col-xs-2">
-				<input type="date" name="startdate" class="form-control col-xs-2" value="{{attributes.startdate}}">
-			</div>
-		</div>
-		<div class="form-group row">
-			<label class="col-xs-2">Päättymispäivämäärä</label>
-			<div class="col-xs-2">
-				<input type="date" name="enddate" class="form-control col-xs-2" value="{{attributes.enddate}}">
 			</div>
 		</div>
 		<div class="form-group row">

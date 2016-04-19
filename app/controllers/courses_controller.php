@@ -5,7 +5,7 @@ class CourseController extends BaseController {
 		if (!$user) {
 			View::make('user/login.html');
 		} else {
-			$personcourses = Personcourse::user_courses($user->personid);
+			$personcourses = PersonCourse::user_courses($user->personid);
 			View::make('course/courselist.html', array('courses' => $personcourses));
 		}
 	}
@@ -20,7 +20,7 @@ class CourseController extends BaseController {
 	
 	public static function create() {
 		$courses = Course::public_courses();
-		View::make('course/joincourse.html');
+		View::make('course/joincourse.html', array('courses' => $courses));
 	}
 
 	public static function store() {
@@ -28,14 +28,22 @@ class CourseController extends BaseController {
 		$attributes = array(
 			'name' => $params['name'],
 			'credits' => $params['credits'],
-			'startdate' => $params['startdate'],
-			'enddate' => $params['enddate'],
 			'ispublic' => isset($params['ispublic'])
 		);
 		$course = new Course($attributes);
+		
 		$errors = $course->errors();
 		if (count($errors) == 0) {
 			$course->save();
+			
+			$attributes = array(
+				'person' => self::get_user_logged_in()->personid,
+				'course' => $course->courseid,
+				'ongoing' => true
+			);
+			$personcourse = new PersonCourse($attributes);
+			$personcourse->save();
+			
 			Redirect::to('/courses/' . $course->courseid, array('message' => 'Liityit kurssille.'));
 		} else {
 			View::make('course/joincourse.html', array('errors' => $errors, 'attributes' => $attributes));

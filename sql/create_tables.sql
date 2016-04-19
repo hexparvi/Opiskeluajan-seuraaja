@@ -1,39 +1,38 @@
-CREATE TABLE course(
+CREATE TABLE Course(
 	courseid SERIAL PRIMARY KEY,
 	name TEXT NOT NULL,
 	credits INTEGER NOT NULL,
-	startdate DATE NOT NULL,
-	enddate DATE NOT NULL,
 	ispublic BOOLEAN NOT NULL
 );
 
-CREATE TABLE person(
+CREATE TABLE Person(
 	personid SERIAL PRIMARY KEY,
 	username TEXT NOT NULL UNIQUE,
 	pw TEXT NOT NULL CHECK(length(pw) > 5)
 );
 
-CREATE TABLE personcourse(
+CREATE TABLE PersonCourse(
 	pcid SERIAL PRIMARY KEY,
 	person INTEGER NOT NULL REFERENCES Person(personid) ON DELETE CASCADE,
 	course INTEGER NOT NULL REFERENCES Course(courseid) ON DELETE CASCADE,
+	ongoing BOOLEAN NOT NULL,
 	grade INTEGER
 );
 
-CREATE TABLE test(
+CREATE TABLE Test(
 	testid SERIAL PRIMARY KEY,
 	personcourse INTEGER NOT NULL REFERENCES PersonCourse(pcid) ON DELETE CASCADE,
 	takendate DATE NOT NULL,
 	points INTEGER
 );
 
-CREATE TABLE note(
+CREATE TABLE Note(
 	noteid SERIAL PRIMARY KEY,
 	personcourse INTEGER NOT NULL REFERENCES PersonCourse(pcid) ON DELETE CASCADE,
 	content TEXT NOT NULL
 );
 
-CREATE TABLE studysession(
+CREATE TABLE StudySession(
 	sessionid SERIAL PRIMARY KEY,
 	personcourse INTEGER NOT NULL REFERENCES PersonCourse(pcid) ON DELETE CASCADE,
 	completiondate DATE NOT NULL,
