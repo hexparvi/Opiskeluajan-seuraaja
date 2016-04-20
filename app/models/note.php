@@ -6,7 +6,7 @@ class Note extends BaseModel {
 		parent::__construct($attributes);
 	}
 	
-	public static function allInPersoncourse($id) {
+	public static function course_notes($id) {
 		$query = DB::connection()->prepare('SELECT * FROM Note WHERE personcourse = :id');
 		$query->execute(array('id' => $id));
 		$rows = $query->fetchAll();

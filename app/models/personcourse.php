@@ -6,6 +6,10 @@ class PersonCourse extends BaseModel {
 		parent::__construct($attributes);
 	}
 	
+	public static function find($userid, $courseid) {
+		
+	}
+	
 	public static function user_courses($id) {
 		$query = DB::connection()->prepare('SELECT * FROM PersonCourse AS pc 
 											INNER JOIN Course AS c ON pc.course = c.courseid 
