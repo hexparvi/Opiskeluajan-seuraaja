@@ -4,6 +4,7 @@ class Test extends BaseModel {
 	
 	public function __construct($attributes) {
 		parent::__construct($attributes);
+		$this->validators = array();
 	}
 	
 	public static function course_tests($personid, $courseid) {
