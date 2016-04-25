@@ -40,15 +40,21 @@
   
   $routes->get('/courses/newtest', function() {
 	  TestController::create();
-	  });
+  });
+  
   $routes->get('/courses/:id/newtest', function($id) {
     TestController::create();
   });
   
   // Opiskelusessioiden reitit
+  $routes->get('/courses/:id/sessions', function($id) {
+    StudyController::index($id);
+  });
+  
   $routes->get('/courses/newsession', function() {
 	  StudyController::create();
-	  });
+  });
+  
   $routes->get('/courses/:id/newsession', function($id) {
     StudyController::create();
   });

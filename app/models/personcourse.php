@@ -75,8 +75,9 @@ class PersonCourse extends BaseModel {
 		if ($this->ongoing) {
 			$bool = 'true';
 		}
-		$query = DB::connection()->prepare('UPDATE PersonCourse SET ongoing = :bool, grade = :grade WHERE pcid = :id');
-		$query->execute(array('bool' => $bool, 'grade' => $this->grade, 'id' => $this->pcid));
+		$query = DB::connection()->prepare('UPDATE PersonCourse SET ongoing = :bool, grade = :grade 
+											WHERE person = :personid AND course = :courseid');
+		$query->execute(array('bool' => $bool, 'grade' => $this->grade, 'personid' => $this->person, 'courseid' => $this->course));
 	}
 	
 	public function save() {
@@ -89,6 +90,7 @@ class PersonCourse extends BaseModel {
 	}
 	
 	public function destroy() {
-		
+		$query = DB::connection()->prepare('DELETE FROM PersonCourse WHERE person = :personid AND course = :courseid');
+		$query->execute(array('personid' => $this->person, 'courseid' => $this->course));
 	}
 }

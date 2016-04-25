@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Päivämäärä</th>
+				<th>Käytetty aika</th>
+				<th>Opiskelutekniikka</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for session in sessions %}
+			<tr>
+				<td>{{session.completiondate}}</td>
+				<td>{{session.time}}</td>
+				<td>{{session.technique}}</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

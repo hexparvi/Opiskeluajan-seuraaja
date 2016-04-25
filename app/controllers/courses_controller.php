@@ -26,6 +26,7 @@ class CourseController extends BaseController {
 
 	public static function store() {
 		self::check_logged_in();
+		$userid = self::get_user_logged_in()->personid;
 		$params = $_POST;
 		$attributes = array(
 			'name' => $params['name'],
@@ -39,7 +40,7 @@ class CourseController extends BaseController {
 			$course->save();
 		
 			$attributes = array(
-				'person' => self::get_user_logged_in()->personid,
+				'person' => $userid,
 				'course' => $course->courseid,
 				'ongoing' => true
 			);
@@ -55,13 +56,15 @@ class CourseController extends BaseController {
 	
 	public static function update($id) {
 		self::check_logged_in();
+		$userid = self::get_user_logged_in()->personid;
 		$params = $_POST;
 		$test = false;
 		if (isset($params['ongoing'])) {
 			$test = true;
 		}
 		$attributes = array(
-			'pcid' => $id,
+			'person' => $userid,
+			'course' => $id,
 			'grade' => $params['grade'],
 			'ongoing' => $test
 		);
@@ -77,7 +80,8 @@ class CourseController extends BaseController {
 	
 	public static function destroy($id) {
 		self::check_logged_in();
-		$course = new Course(array('courseid' => $id));
+		$userid = self::get_user_logged_in()->personid;
+		$course = new PersonCourse(array('person' => $userid, 'course' => $id));
 		$course->destroy();
 		Redirect::to('/courses', array('message' => 'Kurssi on poistettu onnistuneesti.'));
 	}

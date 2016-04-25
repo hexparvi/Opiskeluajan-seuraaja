@@ -7,7 +7,9 @@
 		<div class="form-group row">
 			<label class="col-xs-2">Kurssi</label>
 			<select name="kurssit">
-				<option value="Johdatus tietojenkäsittelytieteeseen">Johdatus tietojenkäsittelytieteeseen</option>
+				{% for course in courses %}
+				<option value={{course.name}}>{{course.name}}</option>
+				{% endfor %}
 			</select>
 		</div>
 		<div class="form-group row">
