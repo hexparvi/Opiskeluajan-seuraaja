@@ -73,7 +73,7 @@ class CourseController extends BaseController {
 			View::make('course/edit.html', array('errors' => $errors, 'attributes' => $attributes));
 		} else {
 			$course->update();
-			Redirect::to('/courses/' . $course->pcid, array('message' => 'Kurssia on muokattu onnistuneesti.'));
+			Redirect::to('/courses/' . $course->course, array('message' => 'Kurssia on muokattu onnistuneesti.'));
 		}
 	}
 	

@@ -49,7 +49,7 @@ class Course extends BaseModel {
 		$query = DB::connection()->prepare('INSERT INTO Course (name, credits, ispublic) 
 											VALUES (:name, :credits, :ispublic) 
 											RETURNING courseid');
-		$query->execute(array('name' => $this->name, 'credits' => $this->credits, 'ispublic' => $this->ispublic));
+		$query->execute(array('name' => $this->name, 'credits' => $this->credits, 'ispublic' => $bool));
 		$row = $query->fetch();
 		$this->courseid = $row['courseid'];
 	}

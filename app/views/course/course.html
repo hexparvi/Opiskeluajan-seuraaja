@@ -2,14 +2,6 @@
 
 {% block content %}
 	<h1>{{course.name}}</h1>
-	
-	{% if message %}
-	<div class="alert alert-danger">
-		<ul>
-			<li>{{message}}</li>
-		</ul>
-	</div>
-	{% endif %}
 
 	<p>
 		<a class="btn btn-default" href="{{base_path}}/courses/{{course.course}}/newsession">Uusi opiskelusessio</a>

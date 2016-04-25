@@ -3,17 +3,7 @@
 {% block content %}
 	<h1>Muokkaa kurssia</h1>
 	
-	{% if errors %}
-		{% for error in errors %}
-		<div class="alert alert-danger">
-			<ul>
-			<li>{{error}}</li>
-			</ul>
-		</div>
-		{% endfor %}
-	{% endif %}
-	
-	<form method="post" action="{{base_path}}/courses/{{attributes.pcid}}/edit">
+	<form method="post" action="{{base_path}}/courses/{{attributes.course}}/edit">
 		<div class="form-group row">
 			<label class="col-xs-2">Arvosana</label>
 			<div class="col-xs-2">
