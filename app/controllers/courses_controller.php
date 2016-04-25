@@ -12,7 +12,7 @@ class CourseController extends BaseController {
 		$course = PersonCourse::find($userid, $id);
 		$tests = Test::course_tests($userid, $id);
 		$notes = Note::course_notes($userid, $id);
-		$studysessions = Studysession::course_sessions($userid, $id);
+		$studysessions = StudySession::course_sessions($userid, $id);
 		View::make('course/course.html', array('course' => $course, 'tests' => $tests, 'notes' => $notes, 'studysessions' => $studysessions));
 	
 	}
@@ -51,7 +51,6 @@ class CourseController extends BaseController {
 		} else {
 			View::make('course/joincourse.html', array('errors' => $errors, 'attributes' => $attributes));
 		}
-		
 	}
 	
 	public static function update($id) {

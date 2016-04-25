@@ -55,6 +55,10 @@
 	  StudyController::create();
   });
   
+  $routes->post('/courses/newsession', function() {
+    StudyController::store();
+  });
+  
   $routes->get('/courses/:id/newsession', function($id) {
     StudyController::create();
   });

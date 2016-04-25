@@ -4,6 +4,7 @@ class StudySession extends BaseModel {
 	
 	public function __construct($attributes) {
 		parent::__construct($attributes);
+		$this->validators = array();
 	}
 	
 	public static function course_sessions($personid, $courseid) {
@@ -23,5 +24,15 @@ class StudySession extends BaseModel {
 			));
 		}
 		return $studysessions;
+	}
+	
+	public function save() {
+		$query = DB::connection()->prepare('INSERT INTO StudySession (person, course, completiondate, time, technique) 
+											VALUES (:person, :course, :completiondate, :time, :technique)
+											RETURNING sessionid');
+		$query->execute(array('person' => $this->person, 'course' => $this->course, 'completiondate' => $this->completiondate, 
+								'time' => $this->time, 'technique' => $this->technique));
+		$row = $query->fetch();
+		$this->sessionid = $row['sessionid'];
 	}
 }

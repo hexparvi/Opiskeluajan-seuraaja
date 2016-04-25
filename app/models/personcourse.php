@@ -82,11 +82,9 @@ class PersonCourse extends BaseModel {
 	
 	public function save() {
 		$query = DB::connection()->prepare('INSERT INTO PersonCourse (person, course, ongoing) 
-											VALUES (:person, :course, :ongoing) 
-											RETURNING pcid');
+											VALUES (:person, :course, :ongoing)');
 		$query->execute(array('person' => $this->person, 'course' => $this->course, 'ongoing' => $this->ongoing));
 		$row = $query->fetch();
-		$this->pcid = $row['pcid'];
 	}
 	
 	public function destroy() {
