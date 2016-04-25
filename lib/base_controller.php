@@ -12,11 +12,9 @@ class BaseController{
 	}
 
     public static function check_logged_in(){
-		$user = self::get_user_logged_in();
-      	if (!$user) {
-			Redirect::to('/login');
+      	if (!isset($_SESSION['user'])) {
+			Redirect::to('/login', array('message' => 'Kirjaudu ensin sisään!'));
 		}
-		return $user;
     }
 
   }

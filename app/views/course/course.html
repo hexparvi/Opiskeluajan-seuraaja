@@ -12,10 +12,10 @@
 	{% endif %}
 
 	<p>
-		<a class="btn btn-default" href="{{base_path}}/courses/{{course.courseid}}/newsession">Uusi opiskelusessio</a>
-		<a class="btn btn-default" href="{{base_path}}/courses/{{course.courseid}}/newtest">Uusi koe</a>
-		<a class="btn btn-default" href="{{base_path}}/courses/{{course.courseid}}/edit">Muokkaa kurssia</a>
-		<form method="post" action="{{base_path}}/courses/{{course.courseid}}/destroy">
+		<a class="btn btn-default" href="{{base_path}}/courses/{{course.course}}/newsession">Uusi opiskelusessio</a>
+		<a class="btn btn-default" href="{{base_path}}/courses/{{course.course}}/newtest">Uusi koe</a>
+		<a class="btn btn-default" href="{{base_path}}/courses/{{course.course}}/edit">Muokkaa kurssia</a>
+		<form method="post" action="{{base_path}}/courses/{{course.course}}/destroy">
 			<button type="submit" class="btn btn-danger">Poista kurssi</button>
 		</form>
 	</p>
@@ -55,7 +55,7 @@
 			<tr>
 				<th>Muistiinpanot</th>
 				<th></th>
-				<th><a class="btn btn-default btn-sm pull-right" href="{{base_path}}/courses/{{course.courseid}}/newnote">Uusi muistiinpano</a></th>
+				<th><a class="btn btn-default btn-sm pull-right" href="{{base_path}}/courses/{{course.course}}/newnote">Uusi muistiinpano</a></th>
 			</tr>
 		</thead>
 		<tbody>

@@ -9,10 +9,10 @@ INSERT INTO PersonCourse (person, course, ongoing) VALUES ((SELECT personid FROM
 INSERT INTO PersonCourse (person, course, ongoing) VALUES ((SELECT personid FROM person WHERE username='pekka'), (SELECT courseid FROM course WHERE name='otm'), true);
 INSERT INTO PersonCourse (person, course, ongoing) VALUES ((SELECT personid FROM person WHERE username='pekka'), (SELECT courseid FROM course WHERE name='tsoha'), false);
 
-INSERT INTO Test (personcourse, takendate, points) VALUES (1, now(), 0);
+INSERT INTO Test (person, course, takendate, points) VALUES (1, 4, now(), 0);
 
-INSERT INTO Note (personcourse, content) VALUES (1, 'Hei, olen muistiinpano.');
-INSERT INTO Note (personcourse, content) VALUES (1, 'Samoin minä.');
+INSERT INTO Note (person, course, content) VALUES (1, 4, 'Hei, olen muistiinpano.');
+INSERT INTO Note (person, course, content) VALUES (1, 4, 'Samoin minä.');
 
-INSERT INTO StudySession (personcourse, completiondate, time, technique) VALUES (1, now(), 240, 'pomodoro');
-INSERT INTO StudySession (personcourse, completiondate, time, technique) VALUES (1, now(), 120, 'luento');
+INSERT INTO StudySession (person, course, completiondate, time, technique) VALUES (1, 4, now(), 240, 'pomodoro');
+INSERT INTO StudySession (person, course, completiondate, time, technique) VALUES (1, 4, now(), 120, 'luento');

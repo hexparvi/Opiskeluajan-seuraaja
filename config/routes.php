@@ -20,6 +20,10 @@
     UserController::handle_login();
   });
   
+  $routes->post('/logout', function() {
+    UserController::logout(); 
+  });
+  
     // Muistiinpanojen reitit
   $routes->get('/courses/:id/newnote', function($id) {
     NoteController::create();

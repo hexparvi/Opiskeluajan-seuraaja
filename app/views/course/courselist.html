@@ -26,10 +26,10 @@
 		<tbody>
 			{% for course in courses %}
 			<tr>
-				<td><a href="{{base_path}}/courses/{{course.courseid}}">{{course.name}}</a></td>
+				<td><a href="{{base_path}}/courses/{{course.course}}">{{course.name}}</a></td>
 				<td>{{course.credits}}</td>
 				<td>5h</td>
-				<td><a class="btn btn-default btn-sm pull-right" href="{{base_path}}/courses/{{course.courseid}}/edit">Muokkaa</a></td>
+				<td><a class="btn btn-default btn-sm pull-right" href="{{base_path}}/courses/{{course.course}}/edit">Muokkaa</a></td>
 			</tr>
 			{% endfor %}
 		</tbody>

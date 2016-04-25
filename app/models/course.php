@@ -42,6 +42,10 @@ class Course extends BaseModel {
 	}
 	
 	public function save() {
+		$bool = 'false';
+		if ($this->ispublic) {
+			$bool = 'true';
+		}
 		$query = DB::connection()->prepare('INSERT INTO Course (name, credits, ispublic) 
 											VALUES (:name, :credits, :ispublic) 
 											RETURNING courseid');
