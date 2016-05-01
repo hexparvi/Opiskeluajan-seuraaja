@@ -24,7 +24,6 @@
 			<tr>
 				<th>Kokeet</th>
 				<th>Pisteet</th>
-				<th>Päivämäärä</th>
 				<th></th>
 				<th></th>
 			</tr>
@@ -32,9 +31,8 @@
 		<tbody>
 			{% for test in tests %}
 			<tr>
-				<td>{{test.id}}</td>
-				<td>{{test.points}}</td>
 				<td>{{test.takendate}}</td>
+				<td>{{test.points}}</td>
 				<td><a class="btn btn-default btn-sm pull-right" href="#">Muokkaa</a></td>
 				<td><a class="btn btn-danger btn-sm pull-right" href="#">Poista koe</a></td>
 			</tr>

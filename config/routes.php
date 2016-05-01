@@ -29,8 +29,8 @@
     NoteController::create();
   });
   
-  $routes->get('/stats', function() {
-    HelloWorldController::stats();
+  $routes->get('/courses/stats', function() {
+    StatsController::show();
   });
   
   // Kokeiden reitit
@@ -44,6 +44,10 @@
   
   $routes->get('/courses/:id/newtest', function($id) {
     TestController::create();
+  });
+  
+  $routes->post('/courses/newtest', function() {
+	 TestController::store();
   });
   
   // Opiskelusessioiden reitit

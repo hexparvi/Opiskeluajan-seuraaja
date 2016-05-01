@@ -24,4 +24,13 @@ class Test extends BaseModel {
 		}
 		return $tests;
 	}
+	
+	public function save() {
+		$query = DB::connection()->prepare('INSERT INTO Test (person, course, takendate, points) 
+											VALUES (:person, :course, :takendate, :points) 
+											RETURNING testid');
+		$query->execute(array('person' => $this->person, 'course' => $this->course, 'takendate' => $this->takendate, 'points' => $this->points));
+		$row = $query->fetch();
+		$this->testid = $row['testid'];
+	}
 }
