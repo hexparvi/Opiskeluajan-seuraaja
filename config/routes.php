@@ -33,21 +33,33 @@
     StatsController::show();
   });
   
+  $routes->get('courses/:id/editnote', function() {
+    
+  });
+	 
+  $routes->post('/courses/:id/editnote', function() {
+	
+  });
+  
   // Kokeiden reitit
-  $routes->get('/edittest', function() {
-    HelloWorldController::edittest();
+  $routes->get('/courses/:courseid/edittest/:testid', function($courseid, $testid) {
+    TestController::edit($testid);
+  });
+  
+  $routes->post('/courses/:courseid/edittest/:testid', function($courseid, $testid) {
+	TestController::update($testid, $courseid);
   });
   
   $routes->get('/courses/newtest', function() {
-	  TestController::create();
+	TestController::create();
   });
   
   $routes->get('/courses/:id/newtest', function($id) {
     TestController::create();
   });
   
-  $routes->post('/courses/newtest', function() {
-	 TestController::store();
+  $routes->post('/courses/:id/newtest', function() {
+	 TestController::update();
   });
   
   // Opiskelusessioiden reitit

@@ -57,15 +57,15 @@ class CourseController extends BaseController {
 		self::check_logged_in();
 		$userid = self::get_user_logged_in()->personid;
 		$params = $_POST;
-		$test = false;
+		$bool = false;
 		if (isset($params['ongoing'])) {
-			$test = true;
+			$bool = true;
 		}
 		$attributes = array(
 			'person' => $userid,
 			'course' => $id,
 			'grade' => $params['grade'],
-			'ongoing' => $test
+			'ongoing' => $bool
 		);
 		$course = new PersonCourse($attributes);
 		$errors = $course->errors();

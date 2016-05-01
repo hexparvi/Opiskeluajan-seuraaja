@@ -7,6 +7,24 @@ class Test extends BaseModel {
 		$this->validators = array();
 	}
 	
+	public static function find($testid) {
+		$query = DB::connection()->prepare('SELECT * FROM Test WHERE testid = :testid');
+		$query->execute(array('testid' => $testid));
+		$row = $query->fetch();
+		
+		if ($row) {
+			$test = new Test(array(
+				'testid' => $row['testid'],
+				'person' => $row['person'],
+				'course' => $row['course'],
+				'takendate' => $row['takendate'],
+				'points' => $row['points']
+			));
+			return $test;
+		}
+		return null;
+	}
+	
 	public static function course_tests($personid, $courseid) {
 		$query = DB::connection()->prepare('SELECT * FROM Test WHERE person = :personid AND course = :courseid');
 		$query->execute(array('personid' => $personid, 'courseid' => $courseid));
@@ -32,5 +50,10 @@ class Test extends BaseModel {
 		$query->execute(array('person' => $this->person, 'course' => $this->course, 'takendate' => $this->takendate, 'points' => $this->points));
 		$row = $query->fetch();
 		$this->testid = $row['testid'];
+	}
+	
+	public function update() {
+		$query = DB::connection()->prepare('UPDATE Test SET takendate = :takendate, points = :points WHERE testid = :testid');
+		$query->execute(array('testid' => $this->testid, 'takendate' => $this->takendate, 'points' => $this->points));
 	}
 }
