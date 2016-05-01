@@ -62,6 +62,10 @@
 	 TestController::update();
   });
   
+  $routes->post('/courses/:courseid/destroytest/:testid', function($courseid, $testid) {
+	  TestController::destroy($testid, $courseid);
+	  });
+  
   // Opiskelusessioiden reitit
   $routes->get('/courses/:id/sessions', function($id) {
     StudyController::index($id);

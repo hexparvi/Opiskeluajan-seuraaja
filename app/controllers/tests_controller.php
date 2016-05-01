@@ -52,4 +52,12 @@ class TestController extends BaseController {
 			Redirect::to('/courses/' . $courseid, array('message' => 'Koetta on muokattu onnistuneesti.'));
 		}
 	}
+	
+	public static function destroy($testid, $courseid) {
+		self::check_logged_in();
+		$userid = self::get_user_logged_in()->personid;
+		$test = new Test(array('testid' => $testid));
+		$test->destroy();
+		Redirect::to('/courses/' . $courseid, array('message' => 'Koe on poistettu onnistuneesti.'));
+	}
 }

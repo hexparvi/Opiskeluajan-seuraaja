@@ -56,4 +56,9 @@ class Test extends BaseModel {
 		$query = DB::connection()->prepare('UPDATE Test SET takendate = :takendate, points = :points WHERE testid = :testid');
 		$query->execute(array('testid' => $this->testid, 'takendate' => $this->takendate, 'points' => $this->points));
 	}
+	
+	public function destroy() {
+		$query = DB::connection()->prepare('DELETE FROM Test WHERE testid = :testid');
+		$query->execute(array('testid' => $this->testid));
+	}
 }
