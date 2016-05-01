@@ -25,21 +25,29 @@
   });
   
     // Muistiinpanojen reitit
-  $routes->get('/courses/:id/newnote', function($id) {
+  $routes->get('/courses/:courseid/newnote', function($courseid) {
     NoteController::create();
   });
+  
+  $routes->post('/courses/newnote', function() {
+	  NoteController::store();
+	  });
   
   $routes->get('/courses/stats', function() {
     StatsController::show();
   });
   
-  $routes->get('courses/:id/editnote', function() {
-    
+  $routes->get('/courses/:courseid/editnote/:noteid', function($courseid, $noteid) {
+    NoteController::edit($noteid);
   });
 	 
-  $routes->post('/courses/:id/editnote', function() {
-	
+  $routes->post('/courses/:courseid/editnote/:noteid', function($courseid, $noteid) {
+	NoteController::update($noteid, $courseid);
   });
+  
+  $routes->post('/courses/:courseid/destroynote/:noteid', function($courseid, $noteid) {
+	  NoteController::destroy($noteid, $courseid);
+	  });
   
   // Kokeiden reitit
   $routes->get('/courses/:courseid/edittest/:testid', function($courseid, $testid) {
@@ -58,8 +66,8 @@
     TestController::create();
   });
   
-  $routes->post('/courses/:id/newtest', function() {
-	 TestController::update();
+  $routes->post('/courses/newtest', function() {
+	 TestController::store();
   });
   
   $routes->post('/courses/:courseid/destroytest/:testid', function($courseid, $testid) {

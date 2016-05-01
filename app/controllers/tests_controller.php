@@ -22,7 +22,7 @@ class TestController extends BaseController {
 		$errors = $test->errors();
 		if (count($errors) == 0) {
 			$test->save();
-			Redirect::to('/courses', array('message' => 'Koe lisätty.'));
+			Redirect::to('/courses/' . $test->course, array('message' => 'Koe lisätty.'));
 		} else {
 			View::make('test/newtest.html', array('errors' => $errors, 'attributes' => $attributes));
 		}

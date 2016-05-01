@@ -56,8 +56,12 @@
 			{% for note in notes %}
 			<tr>
 				<td>{{note.content}}</td>
-				<td><a class="btn btn-default btn-sm pull-right" href="#">Muokkaa</a></td>
-				<td><a class="btn btn-danger btn-sm pull-right" href="#">Poista muistiinpano</a></td>
+				<td><a class="btn btn-default btn-sm pull-right" href="{{base_path}}/courses/{{course.course}}/editnote/{{note.noteid}}">Muokkaa</a></td>
+				<td>
+					<form method="post" action="{{base_path}}/courses/{{course.course}}/destroynote/{{note.noteid}}">
+						<button type="submit" class="btn btn-danger">Poista muistiinpano</button>
+					</form>
+				</td>
 			</tr>
 			{% endfor %}
 		</tbody>
