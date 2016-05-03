@@ -24,7 +24,8 @@ class TestController extends BaseController {
 			$test->save();
 			Redirect::to('/courses/' . $test->course, array('message' => 'Koe lisätty.'));
 		} else {
-			View::make('test/newtest.html', array('errors' => $errors, 'attributes' => $attributes));
+			$courses = PersonCourse::user_courses(self::get_user_logged_in()->personid);
+			View::make('test/newtest.html', array('courses' => $courses, 'errors' => $errors, 'attributes' => $attributes));
 		}
 	}
 	

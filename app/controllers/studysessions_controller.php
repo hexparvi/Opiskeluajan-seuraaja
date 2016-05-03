@@ -32,7 +32,8 @@ class StudyController extends BaseController {
 			$session->save();
 			Redirect::to('/courses', array('message' => 'Opiskelusessio lisätty.'));
 		} else {
-			View::make('studysession/newsession.html', array('errors' => $errors, 'attributes' => $attributes));
+			$courses = PersonCourse::user_courses($userid);
+			View::make('studysession/newsession.html', array('courses' => $courses, 'errors' => $errors, 'attributes' => $attributes));
 		}
 	}
 }

@@ -4,7 +4,7 @@ class Note extends BaseModel {
 	
 	public function __construct($attributes) {
 		parent::__construct($attributes);
-		$this->validators = array();
+		$this->validators = array('validate_content');
 	}
 	
 	public static function find($noteid) {
@@ -58,5 +58,11 @@ class Note extends BaseModel {
 	public function destroy() {
 		$query = DB::connection()->prepare('DELETE FROM Note WHERE noteid = :noteid');
 		$query->execute(array('noteid' => $this->noteid));
+	}
+	
+	public function validate_content() {
+		$errors = array();
+		$errors = $this->validate_string_length($this->content, 1, 255);
+		return $errors;
 	}
 }

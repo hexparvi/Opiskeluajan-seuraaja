@@ -4,7 +4,7 @@ class StudySession extends BaseModel {
 	
 	public function __construct($attributes) {
 		parent::__construct($attributes);
-		$this->validators = array();
+		$this->validators = array('validate_time', 'validate_technique');
 	}
 	
 	public static function course_sessions($personid, $courseid) {
@@ -34,5 +34,17 @@ class StudySession extends BaseModel {
 								'time' => $this->time, 'technique' => $this->technique));
 		$row = $query->fetch();
 		$this->sessionid = $row['sessionid'];
+	}
+	
+	public function validate_time() {
+		$errors = array();
+		$errors = $this->validate_int_value($this->time, 1, 1440);
+		return $errors;
+	}
+	
+	public function validate_technique() {
+		$errors = array();
+		$errors = $this->validate_string_length($this->technique, 1, 30);
+		return $errors;
 	}
 }

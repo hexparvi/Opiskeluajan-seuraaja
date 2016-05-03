@@ -23,7 +23,8 @@ class NoteController extends BaseController {
 			$note->save();
 			Redirect::to('/courses/' . $note->course, array('message' => 'Muistiinpano lisätty.'));
 		} else {
-			View::make('note/newnote.html', array('errors' => $errors, 'attributes' => $attributes));
+			$courses = PersonCourse::user_courses(self::get_user_logged_in()->personid);
+			View::make('note/newnote.html', array('courses' => $courses, 'errors' => $errors, 'attributes' => $attributes));
 		}
 	}
 	
