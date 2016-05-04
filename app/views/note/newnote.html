@@ -1,7 +1,10 @@
 {% extends "base.html" %}
+{% import "macros/forms.html" as forms %}
 
 {% block content %}
 	<h1>Uusi muistiinpano kurssille</h1>
+	
+	{{forms.error_display(errors)}}
 	
 	<form method="post" action="{{base_path}}/courses/newnote">
 		<div class="form-group row">

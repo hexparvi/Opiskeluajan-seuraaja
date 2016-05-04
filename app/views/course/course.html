@@ -1,15 +1,15 @@
 {% extends "base.html" %}
+{% import "macros/forms.html" as forms %}
+{% import "macros/navigation.html" as nav %}
 
 {% block content %}
 	<h1>{{course.name}}</h1>
 
 	<p>
-		<a class="btn btn-default" href="{{base_path}}/courses/{{course.course}}/newsession">Uusi opiskelusessio</a>
-		<a class="btn btn-default" href="{{base_path}}/courses/{{course.course}}/newtest">Uusi koe</a>
-		<a class="btn btn-default" href="{{base_path}}/courses/{{course.course}}/edit">Muokkaa kurssia</a>
-		<form method="post" action="{{base_path}}/courses/{{course.course}}/destroy">
-			<button type="submit" class="btn btn-danger">Poista kurssi</button>
-		</form>
+		{{nav.nav_button("#{base_path}/courses/#{course.course}/newsession", "Uusi opiskelusessio")}}
+		{{nav.nav_button("#{base_path}/courses/#{course.course}/newtest", "Uusi koe")}}
+		{{nav.nav_button("#{base_path}/courses/#{course.course}/edit", "Muokaa kurssia")}}
+		{{forms.destroy_button("#{base_path}/courses/#{course.course}/destroy", "Poista kurssi")}}
 	</p>
 
 	<ul>
@@ -36,7 +36,7 @@
 				<td><a class="btn btn-default btn-sm pull-right" href="{{base_path}}/courses/{{course.course}}/edittest/{{test.testid}}">Muokkaa</a></td>
 				<td>
 					<form method="post" action="{{base_path}}/courses/{{course.course}}/destroytest/{{test.testid}}">
-						<button type="submit" class="btn btn-danger">Poista koe</button>
+						<button type="submit" class="btn btn-danger btn-sm pull-right">Poista</button>
 					</form>
 				</td>
 			</tr>
@@ -59,7 +59,7 @@
 				<td><a class="btn btn-default btn-sm pull-right" href="{{base_path}}/courses/{{course.course}}/editnote/{{note.noteid}}">Muokkaa</a></td>
 				<td>
 					<form method="post" action="{{base_path}}/courses/{{course.course}}/destroynote/{{note.noteid}}">
-						<button type="submit" class="btn btn-danger">Poista muistiinpano</button>
+						<button type="submit" class="btn btn-danger btn-sm pull-right">Poista</button>
 					</form>
 				</td>
 			</tr>

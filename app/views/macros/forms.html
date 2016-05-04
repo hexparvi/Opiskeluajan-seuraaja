@@ -4,14 +4,25 @@
   </form>
 {% endmacro %}
 
-{% macro edit_button(action, text) %}
-  <form method="post" action="{{action}}" style="display: inline-block;">
-    <button type="submit" class="btn btn-default">{{text|default('Muokkaa')}}</button>
-  </form>
+{% macro submit_button(text, class) %}
+	{% set test = "btn btn-primary " ~ class %}
+	<button type="submit" class="btn btn-primary ~ {{class}}">{{text|default('Tallenna')}}</button>
 {% endmacro %}
 
-{% macro add_button(action, text) %}
-  <form method="post" action="{{action}}" style="display: inline-block;">
-    <button type="submit" class="btn btn-primary">{{text|default('Lisää uusi')}}</button>
-  </form>
+{% macro error_display(errors) %}
+	{% for error in errors %}
+	    <div class="alert alert-danger">
+		  <ul>
+			<li>{{error}}</li>
+		  </ul>
+	    </div>
+	{% endfor %}
+{% endmacro %}
+
+{% macro message_display(message) %}
+	<div class="aler alert-success">
+		<ul>
+			<li>{{message}}</li>
+		</ul>
+	</div>
 {% endmacro %}

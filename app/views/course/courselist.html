@@ -1,10 +1,12 @@
 {% extends "base.html" %}
+{% import "macros/forms.html" as forms %}
+{% import "macros/navigation.html" as nav %}
 
 {% block content %}
 	<h1>Kurssit</h1>
-
-	<a class="btn btn-default" href="{{base_path}}/courses/newsession">Uusi opiskelusessio</a>
-	<a class="btn btn-default" href="{{base_path}}/courses/newtest">Uusi koe</a>
+	
+	{{nav.nav_button("#{base_path}/courses/newsession", "Uusi opiskelusessio")}}
+	{{nav.nav_button("#{base_path}/courses/newtest", "Uusi koe")}}
 
 	<table class="table table-striped">
 		<thead>
