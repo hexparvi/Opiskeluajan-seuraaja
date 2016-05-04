@@ -5,12 +5,12 @@
 	<h1>Liity uudelle kurssille</h1>
 
 	<h3>Valitse olemassaoleva kurssi listasta...</h3>
-	<form method="post" action="{{base_path}}/course">
+	<form method="post" action="{{base_path}}/joincourse">
 		<div class="form-group row">
 			<label class="col-xs-2">Kurssi</label>
-			<select name="kurssit">
+			<select name="course">
 				{% for course in courses %}
-				<option value="{{course.name}}">{{course.name}}</option>
+				<option value="{{course.courseid}}">{{course.name}}</option>
 				{% endfor %}
 			</select>
 		</div>
@@ -25,7 +25,7 @@
 	
 	{{forms.error_display(errors)}}
 
-	<form method="post" action="{{base_path}}/course">
+	<form method="post" action="{{base_path}}/createcourse">
 		<div class="form-group row">
 			<label class="col-xs-2">Nimi</label>
 			<div class="col-xs-2">

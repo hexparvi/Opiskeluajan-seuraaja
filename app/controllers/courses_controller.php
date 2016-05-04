@@ -21,7 +21,27 @@ class CourseController extends BaseController {
 		self::check_logged_in();
 		$courses = Course::public_courses();
 		View::make('course/joincourse.html', array('courses' => $courses));
-	
+	}
+
+	public static function join() {
+		self::check_logged_in();
+		$userid = self::get_user_logged_in()->personid;
+		$params = $_POST;
+		
+		$attributes = array(
+				'person' => $userid,
+				'course' => $params['course'],
+				'ongoing' => true
+		);
+		
+		if (PersonCourse::is_on_course($userid, $params['course'])) {
+			$courses = Course::public_courses();
+			View::make('course/joincourse.html', array('errors' => array('Olet jo kurssilla!'), 'attributes' => $attributes, 'courses' => $courses));
+		} else {
+			$personcourse = new PersonCourse($attributes);
+			$personcourse->save();
+			Redirect::to('/courses/' . $personcourse->course, array('message' => 'Liityit kurssille.'));
+		}
 	}
 
 	public static function store() {
@@ -49,7 +69,8 @@ class CourseController extends BaseController {
 			
 			Redirect::to('/courses/' . $course->courseid, array('message' => 'Liityit kurssille.'));
 		} else {
-			View::make('course/joincourse.html', array('errors' => $errors, 'attributes' => $attributes));
+			$courses = Course::public_courses();
+			View::make('course/joincourse.html', array('errors' => $errors, 'attributes' => $attributes, 'courses' => $courses));
 		}
 	}
 	

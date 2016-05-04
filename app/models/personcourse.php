@@ -7,11 +7,11 @@ class PersonCourse extends BaseModel {
 		$this->validators = array();
 	}
 	
-	public static function find($personid, $courseid) {
+	public static function find($person, $course) {
 		$query = DB::connection()->prepare('SELECT * FROM PersonCourse AS pc
 											INNER JOIN Course AS c ON pc.course = c.courseid
-											WHERE pc.person = :personid AND pc.course= :courseid LIMIT 1');
-		$query->execute(array('personid' => $personid, 'courseid' => $courseid));
+											WHERE pc.person = :person AND pc.course= :course LIMIT 1');
+		$query->execute(array('person' => $person, 'course' => $course));
 		$row = $query->fetch();
 		$course = new PersonCourse(array(
 			'person' => $row['person'],
@@ -23,6 +23,17 @@ class PersonCourse extends BaseModel {
 			'ispublic' => $row['ispublic']
 		));
 		return $course;
+	}
+	
+	public static function is_on_course($person, $course) {
+		$query = DB::connection()->prepare('SELECT * FROM PersonCourse WHERE person = :person AND course = :course LIMIT 1');
+		$query->execute(array('person' => $person, 'course' => $course));
+		$row = $query->fetch();
+		
+		if ($row) {
+			return true;
+		}
+		return false;
 	}
 	
 	public static function user_courses($userid) {
