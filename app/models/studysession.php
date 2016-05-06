@@ -26,6 +26,20 @@ class StudySession extends BaseModel {
 		return $studysessions;
 	}
 	
+	public static function course_count($personid, $courseid) {
+		$query = DB::connection()->prepare('SELECT COUNT(sessionid) FROM Studysession WHERE person = :personid AND course = :courseid');
+		$query->execute(array('personid' => $personid, 'courseid' => $courseid));
+		$row = $query->fetch();
+		return $row['count'];
+	}
+	
+	public static function course_time($personid, $courseid) {
+		$query = DB::connection()->prepare('SELECT SUM(time) FROM Studysession WHERE person = :personid AND course = :courseid');
+		$query->execute(array('personid' => $personid, 'courseid' => $courseid));
+		$row = $query->fetch();
+		return $row['sum'];
+	}
+	
 	public function save() {
 		$query = DB::connection()->prepare('INSERT INTO StudySession (person, course, completiondate, time, technique) 
 											VALUES (:person, :course, :completiondate, :time, :technique)

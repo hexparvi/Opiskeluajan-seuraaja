@@ -14,9 +14,9 @@
 
 	<ul>
 		<li><strong>Op:</strong> {{course.credits}}</li>
-		<li><strong>Käytetty aika:</strong> 5h</li>
+		<li><strong>Käytetty aika:</strong> {{course.timespent}}</li>
 		<li><strong>Arvosana:</strong> {{course.grade}}</li>
-		<li><strong><a href="{{base_path}}/courses/{{course.course}}/sessions">Opiskelusessiot</a></strong></li>
+		<li><strong><a href="{{base_path}}/courses/{{course.course}}/sessions">Opiskelusessiot:</a></strong> {{course.sessioncount}}</li>
 	</ul>
 
 	<table class="table table-striped">

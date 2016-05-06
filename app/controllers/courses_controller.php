@@ -101,8 +101,12 @@ class CourseController extends BaseController {
 	public static function destroy($id) {
 		self::check_logged_in();
 		$userid = self::get_user_logged_in()->personid;
-		$course = new PersonCourse(array('person' => $userid, 'course' => $id));
-		$course->destroy();
+		$personcourse = new PersonCourse(array('person' => $userid, 'course' => $id));
+		$personcourse->destroy();
+		$course = Course::find($id);
+		if (!$course->ispublic) {
+			$course->destroy();
+		}
 		Redirect::to('/courses', array('message' => 'Kurssi on poistettu onnistuneesti.'));
 	}
 	

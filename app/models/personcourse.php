@@ -1,6 +1,6 @@
 <?php
 class PersonCourse extends BaseModel {
-	public $person, $course, $grade, $ongoing, $name, $credits, $ispublic;
+	public $person, $course, $grade, $ongoing, $name, $credits, $ispublic, $sessioncount, $timespent;
 	
 	public function __construct($attributes) {
 		parent::__construct($attributes);
@@ -10,17 +10,21 @@ class PersonCourse extends BaseModel {
 	public static function find($person, $course) {
 		$query = DB::connection()->prepare('SELECT * FROM PersonCourse AS pc
 											INNER JOIN Course AS c ON pc.course = c.courseid
-											WHERE pc.person = :person AND pc.course= :course LIMIT 1');
+											LEFT JOIN (SELECT person, course, COUNT(sessionid), SUM(time) FROM StudySession GROUP BY person, course) AS s 
+											ON pc.person = s.person AND pc.course = s.course
+											WHERE pc.person = :person AND pc.course = :course');
 		$query->execute(array('person' => $person, 'course' => $course));
 		$row = $query->fetch();
 		$course = new PersonCourse(array(
-			'person' => $row['person'],
-			'course' => $row['course'],
+			'person' => $row['0'],
+			'course' => $row['1'],
 			'grade' => $row['grade'],
 			'ongoing' => $row['ongoing'],
 			'name' => $row['name'],
 			'credits' => $row['credits'],
-			'ispublic' => $row['ispublic']
+			'ispublic' => $row['ispublic'],
+			'sessioncount' => $row['count'],
+			'timespent' => $row['sum']
 		));
 		return $course;
 	}
@@ -37,22 +41,26 @@ class PersonCourse extends BaseModel {
 	}
 	
 	public static function user_courses($userid) {
-		$query = DB::connection()->prepare('SELECT * FROM PersonCourse AS pc 
-											INNER JOIN Course AS c ON pc.course = c.courseid 
-											WHERE pc.person = :id');
-		$query->execute(array('id' => $userid));
+		$query = DB::connection()->prepare('SELECT * FROM PersonCourse AS pc
+											INNER JOIN Course AS c ON pc.course = c.courseid
+											LEFT JOIN (SELECT person, course, COUNT(sessionid), SUM(time) FROM StudySession GROUP BY person, course) AS s 
+											ON pc.person = s.person AND pc.course = s.course
+											WHERE pc.person = :person');
+		$query->execute(array('person' => $userid));
 		$rows = $query->fetchAll();
 		$courses = array();
 		
 		foreach ($rows as $row) {
 			$courses[] = new PersonCourse(array(
-				'person' => $row['person'],
-				'course' => $row['course'],
+				'person' => $row['0'],
+				'course' => $row['1'],
 				'grade' => $row['grade'],
 				'ongoing' => $row['ongoing'],
 				'name' => $row['name'],
 				'credits' => $row['credits'],
-				'ispublic' => $row['ispublic']
+				'ispublic' => $row['ispublic'],
+				'sessioncount' => $row['count'],
+				'timespent' => $row['sum']
 			));
 		}
 		return $courses;

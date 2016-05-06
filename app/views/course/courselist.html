@@ -14,6 +14,7 @@
 				<th>Kurssit</th>
 				<th>Opintopisteet</th>
 				<th>Käytetty aika</th>
+				<th>Opiskelusessiot</th>
 				<th><a class="btn btn-default btn-sm pull-right" href="{{base_path}}/joincourse">Lisää kurssi</a></th>
 			</tr>
 		</thead>
@@ -22,7 +23,8 @@
 			<tr>
 				<td><a href="{{base_path}}/courses/{{course.course}}">{{course.name}}</a></td>
 				<td>{{course.credits}}</td>
-				<td>5h</td>
+				<td>{{course.timespent}}</td>
+				<td>{{course.sessioncount}}</td>
 				<td><a class="btn btn-default btn-sm pull-right" href="{{base_path}}/courses/{{course.course}}/edit">Muokkaa</a></td>
 			</tr>
 			{% endfor %}
